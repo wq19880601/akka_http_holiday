@@ -38,7 +38,7 @@ class GenerateHolidays @Inject()(
     path("holidays" / "calculate") {
       post {
         entity(as[HolidayIn]) { holidayIn =>
-          val calculateHolidays = holidayService.calculateHolidays(holidayIn.year, holidayIn.workdays, holidayIn.holidays)
+          val calculateHolidays = holidayService.calculateHolidays(holidayIn.year, holidayIn.holidays, holidayIn.workdays)
           onComplete(calculateHolidays) {
             case Success(_) => complete("calucate success")
             case Failure(ex) =>

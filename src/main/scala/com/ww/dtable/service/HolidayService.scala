@@ -179,12 +179,12 @@ class HolidayServiceImpl @Inject()(val holidayRepo: HolidayRepo, implicit val ex
 
 
     val dayPatches: Seq[HolidayPatch] = yearDays.map { yd =>
-      val dateStr = date2Str(yd)
+//      val dateStr = date2Str(yd)
 
-      holidayDics.find(x => x.date == dateStr) match {
+      holidayDics.find(x => x.date == yd) match {
         case Some(h) => HolidayPatch(yd, DayType.Holiday, h.holidayDesc) // holiday
         case None =>
-          workDayDics.find(xx => xx.date == dateStr) match {
+          workDayDics.find(xx => xx.date == yd) match {
             case Some(h) => HolidayPatch(yd, DayType.WorkDay, h.holidayDesc) // workday
             case None =>
               if (isWeekend(yd.getDayOfWeek)) {
